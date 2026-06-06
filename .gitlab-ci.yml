@@ -67,7 +67,7 @@ security-test-dast-job:
   image: ghcr.io/zaproxy/zaproxy:stable
   script:
     - echo "Running security DAST testing"
-    - zap-baseline.py -t https://juice-shop.herokuapp.com -r /zap/wrk/zap-report.html #|| true #run zap scan against juice shop and generate report, if true but don't fail the job if the scan finds issues
+    - zap-baseline.py -t https://juice-shop.herokuapp.com  #|| true #run zap scan against juice shop and generate report, if true but don't fail the job if the scan finds issues
  
 security-test-sast-job:
   stage: security
