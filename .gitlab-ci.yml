@@ -66,8 +66,9 @@ security-test-job:   # This job runs in the security stage.
   script:
     - echo "Running security DAST testing"
     - docker run -d -p 3000:3000 --name juice-shop bkimminich/juice-shop #run juice-shop
-    - container-ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' juice-shop) #get container ip
-    - docker run -t --name dast owasp/zap2docker-stable zap-baseline.py -t http://$container-ip:3000 #run zap scan against juice shop container
+    - sleep 30 #wait for juice-shop to start
+    - container_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' juice-shop) #get container ip
+    - docker run -t --name dast owasp/zap2docker-stable zap-baseline.py -t http://$container_ip:3000 #run zap scan against juice shop container
 
 
 deploy-job:      # This job runs in the deploy stage.
