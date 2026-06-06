@@ -62,9 +62,9 @@ lint-test-job:   # This job also runs in the test stage.
     ##- container_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' juice-shop) #get container ip
     #- docker run -t --name dast owasp/zap2docker-stable zap-baseline.py -t http://$container_ip:3000 #run zap scan against juice shop container
 
-security-test-job:
+security-test-dast-job:
   stage: security
-  image: owasp/zap2docker-stable
+  image: ghcr.io/zaproxy/zaproxy:stable
   script:
     - echo "Running security DAST testing"
     - zap-baseline.py -t https://juice-shop.herokuapp.com -r zap-report.html || true #run zap scan against juice shop and generate report, but don't fail the job if the scan finds issues
