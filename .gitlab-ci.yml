@@ -68,12 +68,13 @@ security-test-dast-job:
   script:
     - echo "Running security DAST testing"
     - zap-baseline.py -t https://juice-shop.herokuapp.com -r /zap/wrk/zap-report.html #|| true #run zap scan against juice shop and generate report, if true but don't fail the job if the scan finds issues
-    - cp /zap/wrk/zap-report.html ./zap-report.html #copy report to current directory for artifacts
-  artifacts:
-    when: always
-    paths:
-      - zap-report.html
-    expire_in: 1 week
+ 
+security-test-sast-job:
+  stage: security
+  image: horuszup/horusec-cli:latest
+  script:
+    - echo "Security SAST testing..."
+    - horusec start -p ./ -D true
 
 deploy-job:      # This job runs in the deploy stage.
   stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
