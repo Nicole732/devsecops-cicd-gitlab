@@ -28,3 +28,16 @@ This project demonstrates a production-style DevSecOps pipeline that automatical
 
 Security gates are enforced at the pipeline level — **critical vulnerabilities block deployment**.
 
+## Key Concepts Demonstrated
+
+- **Shift Left Security** — security tests run before deployment
+- **Containerized jobs** — each job runs in its own Docker container
+- **Parallel security scanning** — DAST, SAST, and SCA run simultaneously
+- **Severity-based gating** — only critical findings block the pipeline
+- **Artifact passing** — `node_modules` built once and shared across jobs
+
+---
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
