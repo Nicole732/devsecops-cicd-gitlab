@@ -23,6 +23,20 @@ build-job:       # This job runs in the build stage, which runs first.
   script:
     - echo "Compiling the code..."
     - echo "Compile complete."
+    - docker build -t example .
+    - docker save example > example.tar
+  artifacts:
+    paths:
+      - example.tar  # This artifact will be passed to the next stage (test).
+
+#frontend-test-job:
+  #stage: test
+  #script:
+    #- echo "Running frontend tests...""
+    #- docker load -i example.tar  # Load the artifact from the build stage.
+    #- docker run - some flags example
+    #- some front end tests 
+
 
 unit-test-job:   # This job runs in the test stage.
   stage: test    # It only starts when the job in the build stage completes successfully.
@@ -43,4 +57,5 @@ deploy-job:      # This job runs in the deploy stage.
   script:
     - echo "Deploying application..."
     - echo "Application successfully deployed."
-    - ls -l
+    #- docker tag example name:versiom
+    #- docker push name:version
