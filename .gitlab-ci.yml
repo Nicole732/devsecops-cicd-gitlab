@@ -29,7 +29,7 @@ build-job:       # This job runs in the build stage, which runs first.
     - npm install
   artifacts:
     paths:
-    - node_modules # This artifact will be passed to the next stage (test).
+      - node_modules # This artifact will be passed to the next stage (test).
 
     #- docker build -t example .
    # - docker save example > example.tar
